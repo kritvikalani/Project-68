@@ -1,21 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import {createAppContainer} from 'react-navigation';
+import {createBottomTabNavigator} from 'react-navigation-tabs'
+import {Header} from 'react-native-elements'
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import Fb from './screens/fb';
+import In from './screens/in';
+
+export default class App extends React.Component() {
+    render(){
+        return(
+          <View>
+            <Header
+            backgroundColor={'pink'}
+            centerComponent={{
+              text: 'Buzz App',
+              style: { color: 'black', fontSize: 20 },
+            }}
+            >
+            </Header>
+            <AppContainer/>
+          </View>
+        )
+      }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+const TabNavigator = createBottomTabNavigator({
+    Facebook: {screen: Fb},
+    Instagram: {screen: In}
+  })
+
+  const AppContainer = createAppContainer(TabNavigator)
